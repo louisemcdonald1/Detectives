@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Detectives2.Models.Actor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    int count = 0;
+}
+<div class="flexContainer flexContainerMedium">
+    <div class="headerButtons">
+        @using (Html.BeginForm("Index", "Actors", "FormMethod.Get"))
+        {
+            <p>
+                @Html.ActionLink("Create New Actor", "Create", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Sort by Name", "Index", null, new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Sort by Year", "Index", null, new { sortOrder = ViewBag.YearSortParam, currentFilter = ViewBag.CurrentFilter }, new { @class = "btn btn-default" })
+                &nbsp; &nbsp; Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Search" />
+
+            </p>
+        }
+        </div>
+        @*display a clickable image of each item*@
+        @foreach (var film in Model)
+        {
+            if (count % 4 == 0)
+            {
+                <br />
+                <br />
+            }
+            <div class="dbItem">
+                <a href="@Url.Action("Details", new {id = film.Id })">
+                    <img class="img-responsive" src="@Url.Content(film.Image)" />
+                </a>
+            </div>
+            count++;
+        }
+    </div>
+
+
+
+
+

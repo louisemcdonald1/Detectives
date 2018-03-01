@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Fictional Detectives</title>
+    <link rel="shortcut icon" type="image/ico" href="@Url.Content("~/Content/favicon.ico")">
+    @*<link href="~/Content/PagedList.css" rel="stylesheet" />*@
+    @*<link href="~/fonts/Top Secret Stamp.ttf" rel="stylesheet"/>*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 class="pageHeading">Fictional Detectives...</h2>
+
+        <p>
+            @Html.ActionLink("Detectives", "Index", "Home", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Books", "Index", "Books", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Films or TV series", "Index", "FilmOrTv", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Authors", "Index", "Authors", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Actors", "Index", "Actors", null, new { @class = "btn btn-default" })
+        </p>
+        <hr />
+    </div>
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Fictional Detectives", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Detectives", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Books", "Index", "Books")</li>
+                    <li>@Html.ActionLink("Films or TV", "Index", "FilmOrTv")</li>
+                    <li>@Html.ActionLink("Authors", "Index", "Authors")</li>
+                    <li>@Html.ActionLink("Actors", "Index", "Actors")</li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Louise McDonald</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

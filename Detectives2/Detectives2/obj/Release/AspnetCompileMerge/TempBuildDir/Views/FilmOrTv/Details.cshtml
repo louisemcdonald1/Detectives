@@ -1,0 +1,87 @@
+﻿@model Detectives2.Models.FilmOrTv
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Film or TV Series</h2>
+<br />
+<div>
+    <div class="row">
+        <div class="col-xs-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Year)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Year)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Plot)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Plot)
+                </dd>
+
+                <dt>
+                    Actor
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Actor.Name)
+                </dd>
+
+                <dt>
+                    Detective
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Detective.Name)
+                </dd>
+                <dd>
+                    @*hide spoilers and only display them if the user clicks a button. Calls JS script below
+                        to change CSS*@
+                    <br/>
+                    <button id="spoilers" class="btn btn-default">Show spoilers</button>
+                    <div id="spoilersLocation">
+                        <br/>
+                        @Html.DisplayFor(model => model.Spoilers)
+                        <br />
+                        <br />
+                        <button id="hideSpoilers" class="btn btn-default">Hide Spoilers</button>
+                    </div>
+                </dd>
+            </dl>
+            <br />
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </p>
+        </div>
+        <div class="col-xs-6">
+            <img src="@Url.Content(Model.Image)" height="300" />
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/spoilers.js"></script>

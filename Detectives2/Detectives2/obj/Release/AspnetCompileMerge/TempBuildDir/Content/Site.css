@@ -1,0 +1,116 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: 'Baskerville Old Face', 'Times New Roman', Times, serif;  /* 'Agency FB' my choice of general font */
+    font-size: 18px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*************************************************************************************
+    My CSS
+**************************************************************************************/
+h2, h4
+{
+    font-weight: bold;
+    font-family: 'Baskerville Old Face', 'Times New Roman', Times, serif;
+}
+.btn
+{
+    font-size: 16px;
+}
+/*for error messages about deletion rules - Delete Views*/
+.error
+{
+    padding: 1%;
+    color: red;
+    border: solid 2px red;
+}
+/*for hiding spoilers - Details Views*/
+#spoilersLocation
+{
+    display: none;
+}
+/*sizing and layout of images - Index Views*/
+.indexImage
+{
+    max-width: 300px;
+    max-height: 450px;
+    border: solid 1px black;
+    margin: 1%;
+    padding: 1%;
+}
+/*page headings - all Views*/
+@font-face {
+    font-family: 'Top Secret Stamp';
+    src: url('../fonts/Top Secret Stamp.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SleuthSerifBB';
+    src: url('../fonts/SleuthSerifBB.ttf') format('truetype');
+}
+.pageHeading
+{
+    font-family: Elephant, 'Times New Roman', Times, serif;
+    font-size: 4em;
+}
+
+/***  Flexbox for Home/Index page layout*****/
+.flexContainer 
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.headerButtons
+{
+    width: 100%;
+    text-align:center;
+}
+.flexContainer>.dbItem
+{
+  border: solid 1px black;
+  margin: 20px;
+  padding: 20px;
+}
+
+.flexContainer>div>a>img
+{
+    max-height: 300px;
+}
+
+.flexContainerMedium>.dbItem
+{
+  border: solid 1px black;
+  margin: 20px;
+  padding: 15px;
+}
+
+.flexContainerMedium>div>a>img
+{
+    max-height: 225px;
+}
+
+.flexContainerSmall>.dbItem
+{
+  border: solid 1px black;
+  margin: 20px;
+  padding: 10px;
+}
+
+.flexContainerSmall>div>a>img
+{
+    max-height: 150px;
+}

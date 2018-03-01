@@ -1,0 +1,48 @@
+﻿@model Detectives2.Models.Actor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of Actor</h2>
+
+<div>
+    <br />
+    <div class="row">
+        <div class="col-xs-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Years)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Years)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Biography)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Biography)
+                </dd>
+            </dl>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" }) 
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </p>
+        </div>
+        <div class="col-xs-6">
+            <img src="@Url.Content(Model.Image)" height="300" />
+        </div>
+    </div>
+</div>

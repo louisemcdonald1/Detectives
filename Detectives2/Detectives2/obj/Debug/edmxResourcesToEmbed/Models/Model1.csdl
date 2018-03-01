@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FictionalDetectivesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Years" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FilmOrTvs" Relationship="Self.FK_FilmOrTv_Actor" FromRole="Actor" ToRole="FilmOrTv" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Years" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Book_Author" FromRole="Author" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Spoilers" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AuthorId" Type="Int32" />
+    <Property Name="DetectiveId" Type="Int32" />
+    <NavigationProperty Name="Author" Relationship="Self.FK_Book_Author" FromRole="Book" ToRole="Author" />
+    <NavigationProperty Name="Detective" Relationship="Self.FK_Book_Detective" FromRole="Book" ToRole="Detective" />
+  </EntityType>
+  <EntityType Name="Detective">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Books" Relationship="Self.FK_Book_Detective" FromRole="Detective" ToRole="Book" />
+    <NavigationProperty Name="FilmOrTvs" Relationship="Self.FK_FilmOrTv_Detective" FromRole="Detective" ToRole="FilmOrTv" />
+  </EntityType>
+  <EntityType Name="FilmOrTv">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Spoilers" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ActorId" Type="Int32" />
+    <Property Name="DetectiveId" Type="Int32" />
+    <NavigationProperty Name="Actor" Relationship="Self.FK_FilmOrTv_Actor" FromRole="FilmOrTv" ToRole="Actor" />
+    <NavigationProperty Name="Detective" Relationship="Self.FK_FilmOrTv_Detective" FromRole="FilmOrTv" ToRole="Detective" />
+  </EntityType>
+  <Association Name="FK_FilmOrTv_Actor">
+    <End Role="Actor" Type="Self.Actor" Multiplicity="0..1" />
+    <End Role="FilmOrTv" Type="Self.FilmOrTv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FilmOrTv">
+        <PropertyRef Name="ActorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Author">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Detective">
+    <End Role="Detective" Type="Self.Detective" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Detective">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="DetectiveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FilmOrTv_Detective">
+    <End Role="Detective" Type="Self.Detective" Multiplicity="0..1" />
+    <End Role="FilmOrTv" Type="Self.FilmOrTv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Detective">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FilmOrTv">
+        <PropertyRef Name="DetectiveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FictionalDetectivesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actors" EntityType="Self.Actor" />
+    <EntitySet Name="Authors" EntityType="Self.Author" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Detectives" EntityType="Self.Detective" />
+    <EntitySet Name="FilmOrTvs" EntityType="Self.FilmOrTv" />
+    <AssociationSet Name="FK_FilmOrTv_Actor" Association="Self.FK_FilmOrTv_Actor">
+      <End Role="Actor" EntitySet="Actors" />
+      <End Role="FilmOrTv" EntitySet="FilmOrTvs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Author" Association="Self.FK_Book_Author">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Detective" Association="Self.FK_Book_Detective">
+      <End Role="Detective" EntitySet="Detectives" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilmOrTv_Detective" Association="Self.FK_FilmOrTv_Detective">
+      <End Role="Detective" EntitySet="Detectives" />
+      <End Role="FilmOrTv" EntitySet="FilmOrTvs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FictionalDetectivesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+    <Property Name="Years" Type="varchar(max)" />
+    <Property Name="Biography" Type="varchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="SortOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+    <Property Name="Years" Type="varchar" MaxLength="50" />
+    <Property Name="Biography" Type="varchar(max)" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="SortOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Plot" Type="varchar(max)" />
+    <Property Name="Spoilers" Type="varchar(max)" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="AuthorId" Type="int" />
+    <Property Name="DetectiveId" Type="int" />
+    <Property Name="SortOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="Detective">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Category" Type="varchar(max)" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="SortOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="FilmOrTv">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Category" Type="varchar(max)" />
+    <Property Name="Plot" Type="varchar(max)" />
+    <Property Name="Spoilers" Type="varchar(max)" />
+    <Property Name="Image" Type="varchar(max)" />
+    <Property Name="ActorId" Type="int" />
+    <Property Name="DetectiveId" Type="int" />
+    <Property Name="SortOrder" Type="int" />
+  </EntityType>
+  <Association Name="FK_Book_Author">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_Detective">
+    <End Role="Detective" Type="Self.Detective" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Detective">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="DetectiveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FilmOrTv_Actor">
+    <End Role="Actor" Type="Self.Actor" Multiplicity="0..1" />
+    <End Role="FilmOrTv" Type="Self.FilmOrTv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FilmOrTv">
+        <PropertyRef Name="ActorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FilmOrTv_Detective">
+    <End Role="Detective" Type="Self.Detective" Multiplicity="0..1" />
+    <End Role="FilmOrTv" Type="Self.FilmOrTv" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Detective">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FilmOrTv">
+        <PropertyRef Name="DetectiveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FictionalDetectivesModelStoreContainer">
+    <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detective" EntityType="Self.Detective" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmOrTv" EntityType="Self.FilmOrTv" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Book_Author" Association="Self.FK_Book_Author">
+      <End Role="Author" EntitySet="Author" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_Detective" Association="Self.FK_Book_Detective">
+      <End Role="Detective" EntitySet="Detective" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilmOrTv_Actor" Association="Self.FK_FilmOrTv_Actor">
+      <End Role="Actor" EntitySet="Actor" />
+      <End Role="FilmOrTv" EntitySet="FilmOrTv" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilmOrTv_Detective" Association="Self.FK_FilmOrTv_Detective">
+      <End Role="Detective" EntitySet="Detective" />
+      <End Role="FilmOrTv" EntitySet="FilmOrTv" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
